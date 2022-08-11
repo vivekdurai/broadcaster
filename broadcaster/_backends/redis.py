@@ -12,6 +12,7 @@ class RedisBackend(BroadcastBackend):
         parsed_url = urlparse(url)
         self._host = parsed_url.hostname or "localhost"
         self._port = parsed_url.port or 6379
+        self._subscriber = None
 
     async def connect(self) -> None:
         self._pub_conn = await asyncio_redis.Connection.create(self._host, self._port)
